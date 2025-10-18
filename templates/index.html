@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Incidencias Reportadas</h2>
+<a href="{{ url_for('report_incident') }}" class="btn btn-primary mb-3">Reportar Nueva Incidencia</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Estado</th>
+            <th>Archivo Fuente</th>
+            <th>Change ID (CM)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for incident in incidents %}
+        <tr>
+            <td>{{ incident.id }}</td>
+            <td>{{ incident.title }}</td>
+            <td><span class="badge bg-secondary">{{ incident.status }}</span></td>
+            <td>{{ incident.source_code_file }}</td>
+            <td>{{ incident.change_id or 'Pendiente' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No hay incidencias reportadas.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
